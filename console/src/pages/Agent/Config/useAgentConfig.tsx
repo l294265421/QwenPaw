@@ -29,6 +29,16 @@ export function useAgentConfig() {
       form.setFieldsValue({
         ...config,
         auto_continue_on_text_only: config.auto_continue_on_text_only ?? false,
+        skill_auto_evolution_enabled:
+          config.skill_auto_evolution_enabled ?? true,
+        skill_auto_evolution_max_iters:
+          config.skill_auto_evolution_max_iters ?? 8,
+        skill_auto_evolution_max_history_messages:
+          config.skill_auto_evolution_max_history_messages ?? 80,
+        skill_auto_evolution_min_tool_calls:
+          config.skill_auto_evolution_min_tool_calls ?? 10,
+        skill_auto_evolution_reload:
+          config.skill_auto_evolution_reload ?? true,
       });
       setLanguage(langResp.language);
       setTimezone(tzResp.timezone || "UTC");

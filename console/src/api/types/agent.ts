@@ -66,4 +66,10 @@ export interface AgentsRunningConfig {
   memory_summary: MemorySummaryConfig;
   embedding_config: EmbeddingConfig;
   memory_manager_backend: "remelight";
+  /** Background skill reviewer after each user turn (Hermes auto skill). */
+  skill_auto_evolution_enabled: boolean;
+  skill_auto_evolution_max_iters: number;
+  skill_auto_evolution_max_history_messages: number;
+  skill_auto_evolution_min_tool_calls: number;
+  skill_auto_evolution_reload: boolean;
 }

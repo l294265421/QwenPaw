@@ -710,6 +710,46 @@ class AgentsRunningConfig(BaseModel):
         ),
     )
 
+    skill_auto_evolution_enabled: bool = Field(
+        default=True,
+        description=(
+            "After each user turn completes, run a background skill "
+            "reviewer (skills_list / skill_view / skill_manage) on a copy "
+            "of the session memory."
+        ),
+    )
+    skill_auto_evolution_max_iters: int = Field(
+        default=8,
+        ge=1,
+        le=64,
+        description=(
+            "Max ReAct iterations for the background skill evolution agent."
+        ),
+    )
+    skill_auto_evolution_max_history_messages: int = Field(
+        default=80,
+        ge=1,
+        le=500,
+        description="Max session messages passed to the skill reviewer.",
+    )
+    skill_auto_evolution_min_tool_calls: int = Field(
+        default=10,
+        ge=0,
+        le=500,
+        description=(
+            "Minimum number of tool calls required in the reviewed history "
+            "before triggering background skill evolution. 0 disables this "
+            "threshold."
+        ),
+    )
+    skill_auto_evolution_reload: bool = Field(
+        default=False,
+        description=(
+            "Reload the agent after skill mutations so new skills register "
+            "in the toolkit."
+        ),
+    )
+
     @property
     def memory_compact_reserve(self) -> int:
         """Memory compact reserve size (tokens)."""

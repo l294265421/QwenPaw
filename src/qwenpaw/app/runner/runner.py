@@ -33,6 +33,10 @@ from .mission_dispatch import (
 from .session import SafeJSONSession
 from .utils import build_env_context
 from ..channels.schema import DEFAULT_CHANNEL
+from ...extensions.hermes_auto_skill import bootstrap as _hermes_bootstrap  # noqa: F401 - side-effect patch
+from ...extensions.hermes_auto_skill.runner_hook import (
+    schedule_skill_auto_evolution_after_turn,
+)
 from ...agents.react_agent import QwenPawAgent
 from ...exceptions import convert_model_exception
 from ...agents.utils.file_handling import (
@@ -653,6 +657,12 @@ class AgentRunner(Runner):
                     coroutine_task=agent(msgs),
                 ):
                     yield msg, last
+            
+            await schedule_skill_auto_evolution_after_turn(
+                self,
+                agent,
+                agent_config,
+            )
 
         except asyncio.CancelledError as exc:
             logger.info(f"query_handler: {session_id} cancelled!")

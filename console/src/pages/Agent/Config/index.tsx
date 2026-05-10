@@ -10,6 +10,7 @@ import {
   ToolResultCompactCard,
   MemorySummaryCard,
   EmbeddingConfigCard,
+  SkillAutoEvolutionCard,
 } from "./components";
 import { PageHeader } from "@/components/PageHeader";
 import styles from "./index.module.less";
@@ -151,6 +152,19 @@ function AgentConfigPage() {
                 children: (
                   <div className={styles.tabContent}>
                     <MemorySummaryCard />
+                  </div>
+                ),
+              },
+              {
+                key: "skillAutoEvolution",
+                label: (
+                  <span className={styles.tabLabel}>
+                    {t("agentConfig.skillAutoEvolutionTitle")}
+                  </span>
+                ),
+                children: (
+                  <div className={styles.tabContent}>
+                    <SkillAutoEvolutionCard />
                   </div>
                 ),
               },

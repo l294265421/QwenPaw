@@ -94,6 +94,7 @@ async def _run_task(
     skills_dir: str | None = None,
 ) -> dict:
     from agentscope.message import Msg
+    from ..extensions.hermes_auto_skill import bootstrap as _hermes_bootstrap  # noqa: F401 - side-effect patch
     from ..agents.react_agent import QwenPawAgent
 
     agent_config.running.max_iters = max_iters
